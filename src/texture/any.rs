@@ -227,10 +227,10 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
             ctxt.state.texture_units[act].texture = id;
         }
 
-        // if !is_multisampled {
+        if !is_multisampled {
         //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_S, gl::REPEAT as i32);
-        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MAG_FILTER, filtering as i32);
-        // }
+            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MAG_FILTER, filtering as i32);
+        }
 
         // match ty {
         //     Dimensions::Texture1d { .. } => (),
