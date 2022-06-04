@@ -106,7 +106,7 @@ fn get_bind_point(ty: Dimensions) -> gl::types::GLenum {
     match ty {
         Dimensions::Texture1d { .. } => gl::TEXTURE_1D,
         Dimensions::Texture1dArray { .. } => gl::TEXTURE_1D_ARRAY,
-        Dimensions::Texture2d { .. } => gl::TEXTURE_2D,
+        Dimensions::Texture2d { .. } => gl::TEXTURE_RECTANGLE,
         Dimensions::Texture2dArray { .. } => gl::TEXTURE_2D_ARRAY,
         Dimensions::Texture2dMultisample { .. } => gl::TEXTURE_2D_MULTISAMPLE,
         Dimensions::Texture2dMultisampleArray { .. } => gl::TEXTURE_2D_MULTISAMPLE_ARRAY,
