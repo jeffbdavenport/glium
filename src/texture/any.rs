@@ -576,7 +576,7 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
         // } else if !is_multisampled {
         //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
         //                           filtering as i32);
-        }
+        // }
 
         if !has_mipmaps && (ctxt.version >= &Version(Api::Gl, 1, 2) ||
                             ctxt.version >= &Version(Api::GlEs, 3, 0))
