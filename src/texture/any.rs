@@ -326,7 +326,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
             };
 
             if storage_internal_format.is_some() && (ctxt.version >= &Version(Api::Gl, 4, 2) || ctxt.extensions.gl_arb_texture_storage) {
-                ctxt.gl.TexStorage2D(bind_point, texture_levels,
+                ctxt.gl.TexStorage2D(bind_point, 1,
                                      storage_internal_format.unwrap() as gl::types::GLenum,
                                      width, height);
 
