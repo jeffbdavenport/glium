@@ -227,28 +227,28 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
             ctxt.state.texture_units[act].texture = id;
         }
 
-        if !is_multisampled {
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_S, gl::REPEAT as i32);
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MAG_FILTER, filtering as i32);
-        }
+        // if !is_multisampled {
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_S, gl::REPEAT as i32);
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MAG_FILTER, filtering as i32);
+        // }
 
-        match ty {
-            Dimensions::Texture1d { .. } => (),
-            Dimensions::Texture2dMultisample { .. } => (),
-            Dimensions::Texture2dMultisampleArray { .. } => (),
-            _ => {
-                ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_T, gl::REPEAT as i32);
-            },
-        };
-
-        match ty {
-            Dimensions::Texture1d { .. } => (),
-            Dimensions::Texture2d { .. } => (),
-            Dimensions::Texture2dMultisample { .. } => (),
-            _ => {
-                ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_R, gl::REPEAT as i32);
-            },
-        };
+        // match ty {
+        //     Dimensions::Texture1d { .. } => (),
+        //     Dimensions::Texture2dMultisample { .. } => (),
+        //     Dimensions::Texture2dMultisampleArray { .. } => (),
+        //     _ => {
+        //         ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_T, gl::REPEAT as i32);
+        //     },
+        // };
+        //
+        // match ty {
+        //     Dimensions::Texture1d { .. } => (),
+        //     Dimensions::Texture2d { .. } => (),
+        //     Dimensions::Texture2dMultisample { .. } => (),
+        //     _ => {
+        //         ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_R, gl::REPEAT as i32);
+        //     },
+        // };
 
         if has_mipmaps {
             ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
@@ -547,28 +547,28 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
 
         ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_TILING_EXT, gl_tiling as i32);
 
-        if !is_multisampled {
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_S, gl::REPEAT as i32);
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MAG_FILTER, filtering as i32);
-        }
-
-        match ty {
-            Dimensions::Texture1d { .. } => (),
-            Dimensions::Texture2dMultisample { .. } => (),
-            Dimensions::Texture2dMultisampleArray { .. } => (),
-            _ => {
-                ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_T, gl::REPEAT as i32);
-            },
-        };
-
-        match ty {
-            Dimensions::Texture1d { .. } => (),
-            Dimensions::Texture2d { .. } => (),
-            Dimensions::Texture2dMultisample { .. } => (),
-            _ => {
-                ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_R, gl::REPEAT as i32);
-            },
-        };
+        // if !is_multisampled {
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_S, gl::REPEAT as i32);
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MAG_FILTER, filtering as i32);
+        // }
+        //
+        // match ty {
+        //     Dimensions::Texture1d { .. } => (),
+        //     Dimensions::Texture2dMultisample { .. } => (),
+        //     Dimensions::Texture2dMultisampleArray { .. } => (),
+        //     _ => {
+        //         ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_T, gl::REPEAT as i32);
+        //     },
+        // };
+        //
+        // match ty {
+        //     Dimensions::Texture1d { .. } => (),
+        //     Dimensions::Texture2d { .. } => (),
+        //     Dimensions::Texture2dMultisample { .. } => (),
+        //     _ => {
+        //         ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_WRAP_R, gl::REPEAT as i32);
+        //     },
+        // };
 
         if has_mipmaps {
             ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
