@@ -311,7 +311,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
             }
 
         } else if bind_point == gl::TEXTURE_2D || bind_point == gl::TEXTURE_1D_ARRAY ||
-                  bind_point == gl::TEXTURE_CUBE_MAP
+                  bind_point == gl::TEXTURE_CUBE_MAP || bind_point == gl::TEXTURE_RECTANGLE
         {
             let mut data_raw = data_raw;
 
