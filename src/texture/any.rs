@@ -250,13 +250,13 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
         //     },
         // };
 
-        if has_mipmaps {
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
-                                  mipmap_filtering as i32);
-        } else if !is_multisampled {
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
-                                  filtering as i32);
-        }
+        // if has_mipmaps {
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
+        //                           mipmap_filtering as i32);
+        // } else if !is_multisampled {
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
+        //                           filtering as i32);
+        // }
 
         if !has_mipmaps && (ctxt.version >= &Version(Api::Gl, 1, 2) ||
                             ctxt.version >= &Version(Api::GlEs, 3, 0))
@@ -570,12 +570,12 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
         //     },
         // };
 
-        if has_mipmaps {
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
-                                  mipmap_filtering as i32);
-        } else if !is_multisampled {
-            ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
-                                  filtering as i32);
+        // if has_mipmaps {
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
+        //                           mipmap_filtering as i32);
+        // } else if !is_multisampled {
+        //     ctxt.gl.TexParameteri(bind_point, gl::TEXTURE_MIN_FILTER,
+        //                           filtering as i32);
         }
 
         if !has_mipmaps && (ctxt.version >= &Version(Api::Gl, 1, 2) ||
