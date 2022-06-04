@@ -103,17 +103,18 @@ fn extract_dimensions(ty: Dimensions)
 
 #[inline]
 fn get_bind_point(ty: Dimensions) -> gl::types::GLenum {
-    match ty {
-        Dimensions::Texture1d { .. } => gl::TEXTURE_1D,
-        Dimensions::Texture1dArray { .. } => gl::TEXTURE_1D_ARRAY,
-        Dimensions::Texture2d { .. } => gl::TEXTURE_RECTANGLE,
-        Dimensions::Texture2dArray { .. } => gl::TEXTURE_2D_ARRAY,
-        Dimensions::Texture2dMultisample { .. } => gl::TEXTURE_2D_MULTISAMPLE,
-        Dimensions::Texture2dMultisampleArray { .. } => gl::TEXTURE_2D_MULTISAMPLE_ARRAY,
-        Dimensions::Texture3d { .. } => gl::TEXTURE_3D,
-        Dimensions::Cubemap { .. } => gl::TEXTURE_CUBE_MAP,
-        Dimensions::CubemapArray { .. } => gl::TEXTURE_CUBE_MAP_ARRAY,
-    }
+    return gl::TEXTURE_RECTANGLE;
+    // match ty {
+    //     Dimensions::Texture1d { .. } => gl::TEXTURE_1D,
+    //     Dimensions::Texture1dArray { .. } => gl::TEXTURE_1D_ARRAY,
+    //     Dimensions::Texture2d { .. } => gl::TEXTURE_RECTANGLE,
+    //     Dimensions::Texture2dArray { .. } => gl::TEXTURE_2D_ARRAY,
+    //     Dimensions::Texture2dMultisample { .. } => gl::TEXTURE_2D_MULTISAMPLE,
+    //     Dimensions::Texture2dMultisampleArray { .. } => gl::TEXTURE_2D_MULTISAMPLE_ARRAY,
+    //     Dimensions::Texture3d { .. } => gl::TEXTURE_3D,
+    //     Dimensions::Cubemap { .. } => gl::TEXTURE_CUBE_MAP,
+    //     Dimensions::CubemapArray { .. } => gl::TEXTURE_CUBE_MAP_ARRAY,
+    // }
 }
 
 unsafe fn generate_mipmaps(ctxt: &CommandContext<'_>,
