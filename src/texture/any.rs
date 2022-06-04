@@ -445,10 +445,10 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
             unreachable!();
         }
 
-        // only generate mipmaps for color textures
-        if should_generate_mipmaps {
-            generate_mipmaps(&ctxt, bind_point);
-        }
+        // // only generate mipmaps for color textures
+        // if should_generate_mipmaps  {
+        //     generate_mipmaps(&ctxt, bind_point);
+        // }
 
         id
     };
@@ -459,7 +459,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
         requested_format: format,
         actual_format: Cell::new(None),
         ty,
-        levels: texture_levels as u32,
+        levels: 1 as u32,
         generate_mipmaps: should_generate_mipmaps,
         owned: true,
         memory: None,
