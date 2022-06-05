@@ -710,6 +710,7 @@ fn bind_texture_uniform<P, T>(ctxt: &mut context::CommandContext<'_>,
     };
 
     let sampler = sampler.unwrap_or(0);
+    let sampler = gl::SAMPLER_2D_RECT;
 
     // finding an appropriate texture unit
     let texture_unit =
@@ -764,7 +765,6 @@ fn bind_texture_uniform<P, T>(ctxt: &mut context::CommandContext<'_>,
                     ctxt.version >= &Version(Api::GlEs, 3, 0) ||
                     ctxt.extensions.gl_arb_sampler_objects);
 
-            dbg!(sampler);
             unsafe { ctxt.gl.BindSampler(texture_unit as gl::types::GLenum, sampler); }
             ctxt.state.texture_units[texture_unit as usize].sampler = sampler;
         }
