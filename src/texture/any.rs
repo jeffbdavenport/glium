@@ -327,32 +327,32 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
                 a => a
             };
 
-            if storage_internal_format.is_some() && (ctxt.version >= &Version(Api::Gl, 4, 2) || ctxt.extensions.gl_arb_texture_storage) {
-                dbg!("TexStorage2D");
-                ctxt.gl.TexStorage2D(bind_point, 1,
-                                     storage_internal_format.unwrap() as gl::types::GLenum,
-                                     width, height);
-
-                if !data_raw.is_null() {
-                    if is_client_compressed {
-                        ctxt.gl.CompressedTexSubImage2D(bind_point, 0, 0, 0, width, height,
-                                                         teximg_internal_format as u32,
-                                                         data_bufsize as i32, data_raw);
-                    } else {
-                        ctxt.gl.TexSubImage2D(bind_point, 0, 0, 0, width, height, client_format,
-                                              client_type, data_raw);
-                    }
-                }
-
-            } else if is_client_compressed && !data_raw.is_null() {
-                dbg!("CompressedTexImage2D");
-                ctxt.gl.CompressedTexImage2D(bind_point, 0, teximg_internal_format as u32,
-                                   width, height, 0, data_bufsize as i32, data_raw);
-            } else {
+            // if storage_internal_format.is_some() && (ctxt.version >= &Version(Api::Gl, 4, 2) || ctxt.extensions.gl_arb_texture_storage) {
+            //     dbg!("TexStorage2D");
+            //     ctxt.gl.TexStorage2D(bind_point, 1,
+            //                          storage_internal_format.unwrap() as gl::types::GLenum,
+            //                          width, height);
+            //
+            //     if !data_raw.is_null() {
+            //         if is_client_compressed {
+            //             ctxt.gl.CompressedTexSubImage2D(bind_point, 0, 0, 0, width, height,
+            //                                              teximg_internal_format as u32,
+            //                                              data_bufsize as i32, data_raw);
+            //         } else {
+            //             ctxt.gl.TexSubImage2D(bind_point, 0, 0, 0, width, height, client_format,
+            //                                   client_type, data_raw);
+            //         }
+            //     }
+            //
+            // } else if is_client_compressed && !data_raw.is_null() {
+            //     dbg!("CompressedTexImage2D");
+            //     ctxt.gl.CompressedTexImage2D(bind_point, 0, teximg_internal_format as u32,
+            //                        width, height, 0, data_bufsize as i32, data_raw);
+            // } else {
                 dbg!("TexImage2D");
                 ctxt.gl.TexImage2D(bind_point, 0, teximg_internal_format as i32, width,
                                    height, 0, client_format as u32, client_type, data_raw);
-            }
+            // }
 
         } else if bind_point == gl::TEXTURE_2D_MULTISAMPLE {
             assert!(data_raw.is_null());
