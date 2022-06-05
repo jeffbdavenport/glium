@@ -222,7 +222,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
         ctxt.gl.GenTextures(1, &mut id);
 
         {
-            ctxt.gl.BindTexture(bind_point, id);
+            ctxt.gl.BindTexture(dbg!(bind_point), id);
             let act = ctxt.state.active_texture as usize;
             ctxt.state.texture_units[act].texture = id;
         }
@@ -540,7 +540,7 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
         let mut id: gl::types::GLuint = 0;
         ctxt.gl.GenTextures(1, &mut id as *mut u32);
 
-        ctxt.gl.BindTexture(bind_point, id);
+        ctxt.gl.BindTexture(dbg!(bind_point), id);
         let act = ctxt.state.active_texture as usize;
         ctxt.state.texture_units[act].texture = id;
 
@@ -856,7 +856,7 @@ impl TextureExt for TextureAny {
 
         let texture_unit = ctxt.state.active_texture;
         if ctxt.state.texture_units[texture_unit as usize].texture != self.id {
-            unsafe { ctxt.gl.BindTexture(bind_point, self.id) };
+            unsafe { ctxt.gl.BindTexture(dbg!(bind_point), self.id) };
             ctxt.state.texture_units[texture_unit as usize].texture = self.id;
         }
 
