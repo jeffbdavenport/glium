@@ -164,7 +164,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
 
     // getting the `GLenum` corresponding to this texture type
     let bind_point = get_bind_point(ty);
-    print_type_of(bind_point);
+    print_type_of(&bind_point);
 
     // let bind_point = gl::TEXTURE_RECTANGLE;
     if bind_point == gl::TEXTURE_CUBE_MAP || bind_point == gl::TEXTURE_CUBE_MAP_ARRAY {
