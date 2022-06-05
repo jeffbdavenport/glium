@@ -97,6 +97,7 @@ impl Drop for SamplerObject {
 pub fn get_sampler(ctxt: &mut CommandContext<'_>, behavior: &SamplerBehavior)
                    -> Result<gl::types::GLuint, DrawError>
 {
+    dbg!(ctxt.samplers);
     // checking for compatibility
     if ctxt.version < &Version(Api::Gl, 3, 2) && !ctxt.extensions.gl_arb_sampler_objects {
         return Err(DrawError::SamplersNotSupported);

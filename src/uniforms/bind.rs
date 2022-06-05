@@ -710,7 +710,6 @@ fn bind_texture_uniform<P, T>(ctxt: &mut context::CommandContext<'_>,
     };
 
     let sampler = sampler.unwrap_or(0);
-    let sampler = gl::SAMPLER_2D_RECT;
 
     // finding an appropriate texture unit
     let texture_unit =
