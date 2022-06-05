@@ -224,6 +224,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
         ctxt.gl.GenTextures(1, &mut id);
 
         {
+            dbg!("BindTexture");
             ctxt.gl.BindTexture(bind_point, id);
             let act = ctxt.state.active_texture as usize;
             ctxt.state.texture_units[act].texture = id;
@@ -347,6 +348,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
                 ctxt.gl.CompressedTexImage2D(bind_point, 0, teximg_internal_format as u32,
                                    width, height, 0, data_bufsize as i32, data_raw);
             } else {
+                dbg!("TexImage2D");
                 ctxt.gl.TexImage2D(bind_point, 0, teximg_internal_format as i32, width,
                                    height, 0, client_format as u32, client_type, data_raw);
             }
