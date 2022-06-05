@@ -130,6 +130,10 @@ unsafe fn generate_mipmaps(ctxt: &CommandContext<'_>,
     }
 }
 
+fn print_type_of<T>(_: &T) {
+    println!("{}", std::any::type_name::<T>())
+}
+
 /// Builds a new texture.
 ///
 /// # Panic
@@ -159,7 +163,8 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
     }
 
     // getting the `GLenum` corresponding to this texture type
-    let bind_point = dbg!(get_bind_point(ty));
+    let bind_point = get_bind_point(ty);
+    print_type_of(bind_point);
 
     // let bind_point = gl::TEXTURE_RECTANGLE;
     if bind_point == gl::TEXTURE_CUBE_MAP || bind_point == gl::TEXTURE_CUBE_MAP_ARRAY {
