@@ -103,18 +103,19 @@ fn extract_dimensions(ty: Dimensions)
 
 #[inline]
 fn get_bind_point(ty: Dimensions) -> gl::types::GLenum {
-    return gl::TEXTURE_RECTANGLE;
-    // match ty {
-    //     Dimensions::Texture1d { .. } => gl::TEXTURE_1D,
-    //     Dimensions::Texture1dArray { .. } => gl::TEXTURE_1D_ARRAY,
-    //     Dimensions::Texture2d { .. } => gl::TEXTURE_RECTANGLE,
-    //     Dimensions::Texture2dArray { .. } => gl::TEXTURE_2D_ARRAY,
-    //     Dimensions::Texture2dMultisample { .. } => gl::TEXTURE_2D_MULTISAMPLE,
-    //     Dimensions::Texture2dMultisampleArray { .. } => gl::TEXTURE_2D_MULTISAMPLE_ARRAY,
-    //     Dimensions::Texture3d { .. } => gl::TEXTURE_3D,
-    //     Dimensions::Cubemap { .. } => gl::TEXTURE_CUBE_MAP,
-    //     Dimensions::CubemapArray { .. } => gl::TEXTURE_CUBE_MAP_ARRAY,
-    // }
+    // return gl::TEXTURE_RECTANGLE;
+    dbg!(ty);
+    match ty {
+        Dimensions::Texture1d { .. } => gl::TEXTURE_1D,
+        Dimensions::Texture1dArray { .. } => gl::TEXTURE_1D_ARRAY,
+        Dimensions::Texture2d { .. } => gl::TEXTURE_2D,
+        Dimensions::Texture2dArray { .. } => gl::TEXTURE_2D_ARRAY,
+        Dimensions::Texture2dMultisample { .. } => gl::TEXTURE_2D_MULTISAMPLE,
+        Dimensions::Texture2dMultisampleArray { .. } => gl::TEXTURE_2D_MULTISAMPLE_ARRAY,
+        Dimensions::Texture3d { .. } => gl::TEXTURE_3D,
+        Dimensions::Cubemap { .. } => gl::TEXTURE_CUBE_MAP,
+        Dimensions::CubemapArray { .. } => gl::TEXTURE_CUBE_MAP_ARRAY,
+    }
 }
 
 unsafe fn generate_mipmaps(ctxt: &CommandContext<'_>,
@@ -518,8 +519,8 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
     let should_generate_mipmaps = mipmaps.should_generate();
     let texture_levels = mipmaps.num_levels(width, height, depth) as gl::types::GLsizei;
     
-    // let bind_point = get_bind_point(ty);
-    let bind_point = gl::TEXTURE_RECTANGLE;
+    let bind_point = get_bind_point(ty);
+    // let bind_point = gl::TEXTURE_RECTANGLE;
 
     let storage_internal_format = format.to_glenum();
 
@@ -847,12 +848,11 @@ impl TextureExt for TextureAny {
 
     #[inline]
     fn get_bind_point(&self) -> gl::types::GLenum {
-        return gl::TEXTURE_RECTANGLE;
-        // get_bind_point(self.ty)
+        // return gl::TEXTURE_RECTANGLE;
+        get_bind_point(self.ty)
     }
 
     fn bind_to_current(&self, ctxt: &mut CommandContext<'_>) -> gl::types::GLenum {
-        // let bind_point = self.get_bind_point();
         let bind_point = self.get_bind_point();
 
         let texture_unit = ctxt.state.active_texture;
