@@ -59,6 +59,8 @@ impl<U> UniformsExt for U where U: Uniforms {
                 // TODO: remove the size member
                 dbg!(name);
                 dbg!(&uniform.ty);
+                dbg!(&uniform.location);
+                dbg!(value.is_usable_with(&uniform.ty));
                 debug_assert!(uniform.size.is_none());
 
                 if !value.is_usable_with(&uniform.ty) {
