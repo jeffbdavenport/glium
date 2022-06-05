@@ -57,6 +57,8 @@ impl<U> UniformsExt for U where U: Uniforms {
 
             if let Some(uniform) = program.get_uniform(name) {
                 // TODO: remove the size member
+                dbg!(name);
+                dbg!(&uniform.ty);
                 debug_assert!(uniform.size.is_none());
 
                 if !value.is_usable_with(&uniform.ty) {
