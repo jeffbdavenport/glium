@@ -314,7 +314,7 @@ impl<'a> UniformValue<'a> {
             (&UniformValue::UnsignedTexture1d(_, _), UniformType::USampler1d) => true,
             (&UniformValue::DepthTexture1d(_, _), UniformType::Sampler1d) => true,
             (&UniformValue::DepthTexture1d(_, _), UniformType::Sampler1dShadow) => true,
-            (&UniformValue::Texture2d(_, _), UniformType::Sampler2dRect) => true,
+            (&UniformValue::Texture2d(_, _), UniformType::Sampler2d) => true,
             (&UniformValue::CompressedTexture2d(_, _), UniformType::Sampler2dRect) => true,
             (&UniformValue::SrgbTexture2d(_, _), UniformType::Sampler2dRect) => true,
             (&UniformValue::CompressedSrgbTexture2d(_, _), UniformType::Sampler2dRect) => true,
