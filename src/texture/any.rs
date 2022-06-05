@@ -104,7 +104,6 @@ fn extract_dimensions(ty: Dimensions)
 #[inline]
 fn get_bind_point(ty: Dimensions) -> gl::types::GLenum {
     // return gl::TEXTURE_RECTANGLE;
-    dbg!(ty);
     match ty {
         Dimensions::Texture1d { .. } => gl::TEXTURE_1D,
         Dimensions::Texture1dArray { .. } => gl::TEXTURE_1D_ARRAY,
@@ -329,6 +328,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
             };
 
             if storage_internal_format.is_some() && (ctxt.version >= &Version(Api::Gl, 4, 2) || ctxt.extensions.gl_arb_texture_storage) {
+                dbg!("TexStorage2D");
                 ctxt.gl.TexStorage2D(bind_point, 1,
                                      storage_internal_format.unwrap() as gl::types::GLenum,
                                      width, height);
@@ -345,6 +345,7 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
                 }
 
             } else if is_client_compressed && !data_raw.is_null() {
+                dbg!("CompressedTexImage2D");
                 ctxt.gl.CompressedTexImage2D(bind_point, 0, teximg_internal_format as u32,
                                    width, height, 0, data_bufsize as i32, data_raw);
             } else {
@@ -544,7 +545,7 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
         let mut id: gl::types::GLuint = 0;
         ctxt.gl.GenTextures(1, &mut id as *mut u32);
 
-        ctxt.gl.BindTexture(dbg!(bind_point), id);
+        ctxt.gl.BindTexture(bind_point, id);
         let act = ctxt.state.active_texture as usize;
         ctxt.state.texture_units[act].texture = id;
 
