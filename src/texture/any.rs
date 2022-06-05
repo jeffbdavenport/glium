@@ -159,8 +159,8 @@ pub fn new_texture<'a, F: ?Sized, P>(facade: &F, format: TextureFormatRequest,
     }
 
     // getting the `GLenum` corresponding to this texture type
-    // let bind_point = get_bind_point(ty);
-    let bind_point = gl::TEXTURE_RECTANGLE;
+    let bind_point = get_bind_point(ty);
+    // let bind_point = gl::TEXTURE_RECTANGLE;
     if bind_point == gl::TEXTURE_CUBE_MAP || bind_point == gl::TEXTURE_CUBE_MAP_ARRAY {
         assert!(data.is_none());        // TODO: not supported
     }
@@ -517,7 +517,8 @@ pub unsafe fn new_from_fd<F: Facade + ?Sized>(facade: &F,
     let should_generate_mipmaps = mipmaps.should_generate();
     let texture_levels = mipmaps.num_levels(width, height, depth) as gl::types::GLsizei;
     
-    let bind_point = get_bind_point(ty);
+    // let bind_point = get_bind_point(ty);
+    let bind_point = gl::TEXTURE_RECTANGLE;
 
     let storage_internal_format = format.to_glenum();
 
@@ -845,10 +846,12 @@ impl TextureExt for TextureAny {
 
     #[inline]
     fn get_bind_point(&self) -> gl::types::GLenum {
-        get_bind_point(self.ty)
+        return gl::TEXTURE_RECTANGLE;
+        // get_bind_point(self.ty)
     }
 
     fn bind_to_current(&self, ctxt: &mut CommandContext<'_>) -> gl::types::GLenum {
+        // let bind_point = self.get_bind_point();
         let bind_point = self.get_bind_point();
 
         let texture_unit = ctxt.state.active_texture;
