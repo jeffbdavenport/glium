@@ -732,8 +732,6 @@ fn bind_texture_uniform<P, T>(ctxt: &mut context::CommandContext<'_>,
             .unwrap_or_else(|| {
                 texture_bind_points.get_unused().expect("Not enough texture units available")
             });
-    dbg!(texture_unit);
-    let texture_unit = dbg!(gl::SAMPLER_2D_RECT);
     assert!((texture_unit as gl::types::GLint) <
             ctxt.capabilities.max_combined_texture_image_units);
     texture_bind_points.set_used(texture_unit);
@@ -766,6 +764,7 @@ fn bind_texture_uniform<P, T>(ctxt: &mut context::CommandContext<'_>,
                     ctxt.version >= &Version(Api::GlEs, 3, 0) ||
                     ctxt.extensions.gl_arb_sampler_objects);
 
+            dbg!(sampler);
             unsafe { ctxt.gl.BindSampler(texture_unit as gl::types::GLenum, sampler); }
             ctxt.state.texture_units[texture_unit as usize].sampler = sampler;
         }
